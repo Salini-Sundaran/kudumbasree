@@ -1,0 +1,22 @@
+<?php
+include_once"settings/settings.php";
+include_once"classes/userclass.php";
+$obj=new userclass();
+session_start();
+if(isset($_COOKIE['logined'])&&$_COOKIE['logined']==1)
+{
+$key=$_COOKIE['lkey'];
+//employ
+$e=$obj->membervproduct($key);
+$smartyObj->assign("data",$e);
+$s=$obj->membervproduct12($key);
+$smartyObj->assign("data1",$s);
+$smartyObj->display("memberssubheader.tpl");
+$smartyObj->display("membervproduct.tpl");
+$smartyObj->display("footer.tpl");
+}
+else
+{
+	header("location:login.php");
+}	
+?>

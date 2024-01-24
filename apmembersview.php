@@ -1,0 +1,25 @@
+<?php
+include_once"settings/settings.php";
+include_once"classes/userclass.php";
+$obj=new userclass();
+session_start();
+if(isset($_COOKIE['logined'])&&$_COOKIE['logined']==1)
+{
+$key=$_COOKIE['lkey'];
+$lkey=$_GET['key'];
+$smartyObj->assign("e",$lkey);
+$o=$_GET['amo'];
+$smartyObj->assign("h",$o);
+$e=$obj->apmemberview($key,$lkey);
+$smartyObj->assign("view1",$e);
+$k=$obj->apmemberview1($key,$lkey);
+$smartyObj->assign("view2",$k);
+$smartyObj->display("kudumbasreesubheader.tpl");
+$smartyObj->display("apmembersview.tpl");
+$smartyObj->display("footer.tpl");
+}
+else
+{
+	header("location:login.php");
+}
+?>
